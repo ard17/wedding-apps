@@ -8,7 +8,7 @@
 	"scripts": {
 		"start": "nodemon --exec babel-node ./server/index.js",
 		"test": "jest",
-		"reverse:db": "sequelize-auto -o ./schemas -d eshopay -h localhost -u postgres -p 5432 -x root -e postgres"
+		"reverse:db": "sequelize-auto -o ./schemas -d mywedding -h localhost -u postgres -p 5432 -x root -e postgres"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.12.13",

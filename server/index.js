@@ -9,7 +9,7 @@ import middleware from './helpers/middleware';
 
 // for access models to db
 import models, { sequelize } from './model/indexModel';
-// import routes from './routes/IndexRoute';
+import routes from './routes/IndexRoute';
 
 // declare port
 const port = process.env.PORT || 3000;
@@ -36,7 +36,7 @@ app.use(async (req, res, next) => {
 // 	res.send('Hello');
 // });
 
-// app.use(process.env.URL_API + '/users', routes.UsersRoute);
+app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
 
 // use middleware to handle error from others modules
 app.use(middleware.handleError);
