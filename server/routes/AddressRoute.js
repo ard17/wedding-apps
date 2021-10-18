@@ -6,9 +6,10 @@ import authJWT from "../helpers/authJWT.js";
 const router = Router();
 
 router.get("/rawSQL",IndexController.AddressCtrl.findCategoryBySQL);
-router.get("/",authJWT.ensureAdmin,IndexController.AddressCtrl.findAllRows);
+router.get("/",IndexController.AddressCtrl.findAllRows);
 
 router.get("/:id",IndexController.AddressCtrl.findRowById);
+router.get("/:userid",IndexController.AddressCtrl.findByOne);
 
 
 

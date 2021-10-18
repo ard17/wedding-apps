@@ -3,7 +3,7 @@ import { sequelize } from "../model/indexModel";
 const findCategoryBySQL = async(req,res)=>{
     const result = await sequelize.query("select weca_id,weca_name from wedding_category",{
         type : sequelize.QueryTypes.SELECT,
-        model : req.context.model.wedding_category,
+        model : req.context.models.wedding_category,
         mapToModel : true
     });
 
@@ -11,13 +11,13 @@ const findCategoryBySQL = async(req,res)=>{
 }
 
 const findAllRows = async(req,res)=>{
-    const result = await req.context.model.wedding_category.findAll();
+    const result = await req.context.models.wedding_category.findAll();
     return res.send(result);
 }
 
 
 const findRowById = async(req,res)=>{
-    const result = await req.context.model.wedding_category.findByPk(
+    const result = await req.context.models.wedding_category.findByPk(
         req.params.id
     );
     return res.send(result);
@@ -26,7 +26,7 @@ const findRowById = async(req,res)=>{
 const createRow = async(req,res)=>{
     try {
     const {weca_id,weca_name} = req.body;
-    const result = await req.context.model.wedding_category.create({
+    const result = await req.context.models.wedding_category.create({
         weca_id :weca_id,
         weca_name : weca_name
     });
@@ -39,7 +39,7 @@ const createRow = async(req,res)=>{
 // update category set cate_name=${1} where cate_id=${2}
 const updateRow = async(req,res)=>{
     const {weca_name} = req.body;
-    const result = await req.context.model.wedding_category.update(
+    const result = await req.context.models.wedding_category.update(
         {weca_name : weca_name},
         {returning:true,
             where : {weca_id : req.params.id}
@@ -52,7 +52,7 @@ const updateRow = async(req,res)=>{
 const deleteRow = async(req,res)=>{
     const id = req.params.id;
 
-    await req.context.model.wedding_category.destroy({
+    await req.context.models.wedding_category.destroy({
         where : {weca_id : id}
     }).then(result =>{
         return res.send("delete "+result+" rows.")
