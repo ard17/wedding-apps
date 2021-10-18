@@ -38,12 +38,15 @@ app.use(async (req, res, next) => {
 
 app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
 
+//call routes
+app.use(process.env.URL_API + '/weddingcategory', routes.WeddingCategoryRoute);
+
 // use middleware to handle error from others modules
 app.use(middleware.handleError);
 app.use(middleware.notFound);
 
 const dropDatabaseSync = false;
-
+  //njn
 sequelize.sync({ force: dropDatabaseSync }).then(async () => {
 	if (dropDatabaseSync) {
 		console.log('Database do not drop');
