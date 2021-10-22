@@ -38,6 +38,11 @@ app.use(async (req, res, next) => {
 
 app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
 app.use(process.env.URL_API + '/order', routes.OrdersRoute);
+app.use(process.env.URL_API + '/weddreserve', routes.WeddReserveRoute);
+app.use(process.env.URL_API + '/weddpackage', routes.WeddPackageRoute);
+app.use(process.env.URL_API + '/weddreslines', routes.WeddResLinesRoute);
+
+
 
 
 // use middleware to handle error from others modules

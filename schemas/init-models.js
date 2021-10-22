@@ -1,49 +1,32 @@
-import Sequelize from 'sequelize';
-
-const sequelize = new Sequelize(
-	process.env.DATABASE,
-	process.env.DATABASE_USER,
-	process.env.DATABASE_PASSWORD,
-	{
-		dialect: 'postgres',
-		pool: {
-			max: 5,
-			min: 1,
-			acquire: 30000,
-			idle: 10000,
-		},
-	}
-);
-
-const DataTypes = require("sequelize").DataTypes;
-const _account_payment = require("./account_payment");
-const _address = require("./address");
-const _bank = require("./bank");
-const _bank_account = require("./bank_account");
-const _orders = require("./orders");
-const _payment_transaction = require("./payment_transaction");
-const _users = require("./users");
-const _wedding_category = require("./wedding_category");
-const _wedding_gallery = require("./wedding_gallery");
-const _wedding_package = require("./wedding_package");
-const _wedding_reserve = require("./wedding_reserve");
-const _wedding_reserve_lines = require("./wedding_reserve_lines");
-const _wedding_vendor = require("./wedding_vendor");
+var DataTypes = require("sequelize").DataTypes;
+var _account_payment = require("./account_payment");
+var _address = require("./address");
+var _bank = require("./bank");
+var _bank_account = require("./bank_account");
+var _orders = require("./orders");
+var _payment_transaction = require("./payment_transaction");
+var _users = require("./users");
+var _wedding_category = require("./wedding_category");
+var _wedding_gallery = require("./wedding_gallery");
+var _wedding_package = require("./wedding_package");
+var _wedding_reserve = require("./wedding_reserve");
+var _wedding_reserve_lines = require("./wedding_reserve_lines");
+var _wedding_vendor = require("./wedding_vendor");
 
 function initModels(sequelize) {
-  const account_payment = _account_payment(sequelize, DataTypes);
-  const address = _address(sequelize, DataTypes);
-  const bank = _bank(sequelize, DataTypes);
-  const bank_account = _bank_account(sequelize, DataTypes);
-  const orders = _orders(sequelize, DataTypes);
-  const payment_transaction = _payment_transaction(sequelize, DataTypes);
-  const users = _users(sequelize, DataTypes);
-  const wedding_category = _wedding_category(sequelize, DataTypes);
-  const wedding_gallery = _wedding_gallery(sequelize, DataTypes);
-  const wedding_package = _wedding_package(sequelize, DataTypes);
-  const wedding_reserve = _wedding_reserve(sequelize, DataTypes);
-  const wedding_reserve_lines = _wedding_reserve_lines(sequelize, DataTypes);
-  const wedding_vendor = _wedding_vendor(sequelize, DataTypes);
+  var account_payment = _account_payment(sequelize, DataTypes);
+  var address = _address(sequelize, DataTypes);
+  var bank = _bank(sequelize, DataTypes);
+  var bank_account = _bank_account(sequelize, DataTypes);
+  var orders = _orders(sequelize, DataTypes);
+  var payment_transaction = _payment_transaction(sequelize, DataTypes);
+  var users = _users(sequelize, DataTypes);
+  var wedding_category = _wedding_category(sequelize, DataTypes);
+  var wedding_gallery = _wedding_gallery(sequelize, DataTypes);
+  var wedding_package = _wedding_package(sequelize, DataTypes);
+  var wedding_reserve = _wedding_reserve(sequelize, DataTypes);
+  var wedding_reserve_lines = _wedding_reserve_lines(sequelize, DataTypes);
+  var wedding_vendor = _wedding_vendor(sequelize, DataTypes);
 
   payment_transaction.belongsTo(account_payment, { as: "payt_acc_number_account_payment", foreignKey: "payt_acc_number"});
   account_payment.hasMany(payment_transaction, { as: "payment_transactions", foreignKey: "payt_acc_number"});
@@ -92,6 +75,6 @@ function initModels(sequelize) {
     wedding_vendor,
   };
 }
-const models = initModels(sequelize);
-export default models;
-export { sequelize };
+module.exports = initModels;
+module.exports.initModels = initModels;
+module.exports.default = initModels;

@@ -4,8 +4,9 @@ import IndexController from "../controller/IndexController";
 const router = Router();
 
 router.post("/",IndexController.OrdersCtrl.createOrders);
-router.put("/",IndexController.OrdersCtrl.updateOrder);
-router.get("/:id",IndexController.OrdersCtrl.findAllOrders);
+router.put("/:id",IndexController.OrdersCtrl.updateOrder);
+router.get("/",IndexController.OrdersCtrl.findAllOrders);
+router.get("/:id",IndexController.OrdersCtrl.findOrderByOrderName);
 router.delete("/:id",IndexController.OrdersCtrl.deleteOrder);
 
 export default router;
