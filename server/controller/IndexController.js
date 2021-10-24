@@ -1,5 +1,11 @@
-import PaymentCtrl from './PaymentCtrl';
+import BankCtrl from './BankCtrl';
+import BankAccCtrl from './BankAccCtrl';
+import AccPaytCtrl from './AccPaytCtrl';
+import PaytTransCtrl from './PaytTransCtrl';
 
 export default {
-	PaymentCtrl,
+	BankCtrl,
+	BankAccCtrl,
+	AccPaytCtrl,
+	PaytTransCtrl,
 };
