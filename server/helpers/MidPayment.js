@@ -60,7 +60,6 @@ const updateBankAcc = async (req, res, next) => {
 		if (accBank === null) {
 			return res.sendStatus(404);
 		} else {
-			console.log(accBank.baac_saldo);
 			switch (payt_type) {
 				case 'topup':
 					if (accBank.baac_pin_number !== baac_pin_number) {
