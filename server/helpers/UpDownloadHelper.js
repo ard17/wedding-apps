@@ -102,12 +102,11 @@ const uploadMultipleFile = async (req) => {
 
             if (files) {
                 let fileAttr = {
-                    prim_id : 0,
-                    prim_filename: "",
-                    prim_filesize: 0,
-                    prim_filetype: "",
-                    prim_url: "",
-                    prim_primary: false
+                    wega_id : 0,
+                    wega_url_name: "",
+                    wega_filesize: 0,
+                    wega_filetype: "",
+                    wega_weve_id: "",
                 }
 
 
@@ -120,12 +119,11 @@ const uploadMultipleFile = async (req) => {
                     fileName = uploadFile.substring(uploadFile.lastIndexOf(seq), uploadFile.length).replace(seq, "");
 
                     fileAttr = {
-                        prim_id : 0,
-                        prim_filename: fileName,
-                        prim_filesize: v.size,
-                        prim_filetype: v.type,
-                        prim_url: process.env.URL_IMAGE + fileName,
-                        prim_primary: false
+                        wega_id : 0,
+                        wega_filesize: v.size,
+                        wega_filetype: v.type,
+                        wega_url_name: process.env.URL_IMAGE + fileName,
+                        wega_weve_id: ""
                     }
 
                     listOfFiles = [...listOfFiles, fileAttr]
@@ -150,7 +148,7 @@ const uploadMultipleFile = async (req) => {
     return result;
 }
 
-const showProductImage = async (req, res) => {
+const showGallery = async (req, res) => {
     const filename = req.params.filename;
     const url = `${process.cwd()}/${process.env.UPLOAD_DIR}/${filename}`;
     fs.createReadStream(url)
@@ -167,6 +165,6 @@ function responseNotFound(req, res) {
 
 export default {
     uploadSingleFile,
-    showProductImage,
+    showGallery,
     uploadMultipleFile
 }
