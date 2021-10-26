@@ -5,7 +5,7 @@ import IndexController from "../controller/indexController";
 
 const router = Router();
 
-router.get("/rawSQL",IndexController.WeddingCategoryCtrl.findCategoryBySQL);
+
 router.get("/",IndexController.WeddingCategoryCtrl.findAllRows);
 //router.get("/detail",IndexController.WeddingCategoryCtrl.wedding_category);
 

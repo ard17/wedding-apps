@@ -1,19 +1,6 @@
-import { text } from "body-parser";
+
 import { sequelize } from "../model/indexModel";
 
-const findCategoryBySQL = async (req, res) => {
-
-    try {
-        const result = await sequelize.query(`select user_id, user_name, user_email, address.* from users join address
-    on user_id = addr_user_id`, {
-            type: sequelize.QueryTypes.SELECT,
-        });
-        return res.send(result);
-    } catch (error) {
-        return res.send(error);
-    }
-
-}
 
 const findAllRows = async (req, res) => {
     const result = await req.context.models.address.findAll();
@@ -39,10 +26,14 @@ const findByOne = async (req, res) => {
 
 const createRow = async (req, res) => {
     try {
-        const { weca_id, weca_name } = req.body;
+        const { addr_name, addr_detail, addr_latitude, addr_longitude, addr_user_id} = req.body;
         const result = await req.context.models.address.create({
-            addr_id: addr_id,
-            addr_name: addr_name
+            
+            addr_name: addr_name,
+            addr_detail: addr_detail,
+            addr_latitude: addr_latitude,
+            addr_longitude: addr_longitude,
+            addr_user_id: addr_user_id
         });
         return res.send(result);
     } catch (error) {
@@ -52,9 +43,14 @@ const createRow = async (req, res) => {
 
 // update category set cate_name=${1} where cate_id=${2}
 const updateRow = async (req, res) => {
-    const { weca_name } = req.body;
+    const { addr_name, addr_detail, addr_latitude, addr_longitude, addr_user_id} = req.body;
     const result = await req.context.models.address.update(
-        { addr_name: addr_name },
+        {   
+            addr_name: addr_name,
+            addr_detail: addr_detail,
+            addr_latitude: addr_latitude,
+            addr_longitude: addr_longitude,
+            addr_user_id: addr_user_id},
         {
             returning: true,
             where: { addr_id: req.params.id }
@@ -68,7 +64,7 @@ const deleteRow = async (req, res) => {
     const id = req.params.id;
 
     await req.context.models.address.destroy({
-        where: { weca_id: id }
+        where: { addr_id: id }
     }).then(result => {
         return res.send("delete " + result + " rows.")
     }).catch(error => {
@@ -80,7 +76,6 @@ const deleteRow = async (req, res) => {
 
 
 export default {
-    findCategoryBySQL,
     findAllRows,
     findRowById,
     createRow,

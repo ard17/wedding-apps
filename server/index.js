@@ -43,6 +43,7 @@ app.use(process.env.URL_API + '/weddingcategory', routes.WeddingCategoryRoute);
 app.use(process.env.URL_API + '/address', routes.AddressRoute);
 app.use(process.env.URL_API + '/weddingvendor', routes.WeddingVendorRoute);
 app.use(process.env.URL_API + '/weddinggallery', routes.WeddingGalleryRoute);
+app.use(process.env.URL_API + '/users', routes.UserRoute);
 
 // use middleware to handle error from others modules
 app.use(middleware.handleError);

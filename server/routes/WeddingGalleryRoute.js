@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", IndexController.WeddingGalleryCtrl.findAllRows);
 router.get("/images/:filename", UpDonwloadHelper.showGallery);
+router.get("/:wegaId", IndexController.WeddingGalleryCtrl.findRowById);
 
 //router.post("/", IndexController.WeddingGalleryCtrl.createWeddingGallery);
 
@@ -13,6 +14,7 @@ router.post("/multipart",
     IndexController.WeddingGalleryCtrl.uploadWeddingGallery,
     IndexController.WeddingGalleryCtrl.createWeddingGallery,
     IndexController.WeddingGalleryCtrl.findRowById,
+
 );
 
 //router.put("/:id", IndexController.WeddingGalleryCtrl.updateWeddingGallery);

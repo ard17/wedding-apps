@@ -34,10 +34,10 @@ const createWeddingGallery = async (req, res, next) => {
 
 
 const deleteRow = async (req, res) => {
-    const id = req.params.id;
+    const wegaId= req.params.id;
     try {
         const result = await req.context.models.wedding_gallery.destroy({
-            where: { prod_id: parseInt(id) }
+            where: { wega_id: wegaId }
         });
         return res.send("delete " + result + " rows.")
     } catch (error) {
@@ -65,11 +65,11 @@ const uploadWeddingGallery = async (req, res,next) => {
 }
 
 const findRowById = async (req, res) => {
-    const weveId = req.weveId
+    const wegaId = req.params.wegaId
     try {
         const result = await req.context.models.wedding_gallery.findAll(
             {
-                where : {wega_weve_id:parseInt(weveId)}
+                where : {wega_id:wegaId}
             }
         );
         return res.send(result);

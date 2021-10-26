@@ -1,14 +1,5 @@
-import { sequelize } from "../model/indexModel";
 
-const findCategoryBySQL = async(req,res)=>{
-    const result = await sequelize.query("select weca_id,weca_name from wedding_category",{
-        type : sequelize.QueryTypes.SELECT,
-        model : req.context.models.wedding_category,
-        mapToModel : true
-    });
 
-    return res.send(result);
-}
 
 const findAllRows = async(req,res)=>{
     const result = await req.context.models.wedding_category.findAll();
@@ -65,7 +56,6 @@ const deleteRow = async(req,res)=>{
 
 
 export default {
-    findCategoryBySQL,
     findAllRows,
     findRowById,
     createRow,

@@ -1,11 +1,9 @@
 import { Router } from "express";
 import IndexController from "../controller/indexController";
-import authJWT from "../helpers/authJWT.js";
 
 
 const router = Router();
 
-router.get("/rawSQL",IndexController.AddressCtrl.findCategoryBySQL);
 router.get("/",IndexController.AddressCtrl.findAllRows);
 
 router.get("/:id",IndexController.AddressCtrl.findRowById);

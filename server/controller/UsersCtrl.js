@@ -10,7 +10,7 @@ const signup = async (req, res) => {
         const result = await req.context.models.users.create({
             user_name: username,
             user_email : email,
-            user_password : user_password,
+            user_password : hashPassword,
             user_handphone: user_phone,
             user_roles : user_roles
 
@@ -51,7 +51,43 @@ const signin = async(req,res)=>{
     }
 }
 
+const updateRow = async (req, res) => {
+    const { username, email, user_password,user_phone, user_roles  } = req.body;
+    let hashPassword = user_password;
+    hashPassword = await bcrypt.hash(hashPassword, SALT_ROUND);
+
+    const result = await req.context.models.users.update(
+        { user_name: username,
+            user_email : email,
+            user_password : hashPassword,
+            user_handphone: user_phone,
+            user_roles : user_roles 
+        },
+        {
+            returning: true,
+            where: { weve_id: req.params.id }
+        }
+    );
+    return res.send(result);
+}
+
+// delete from category where cate_id=${id}
+const deleteRow = async (req, res) => {
+    const userId = req.params.id;
+
+    await req.context.models.users.destroy({
+        where: { user_id: userId }
+    }).then(result => {
+        return res.send("delete " + result + " rows.")
+    }).catch(error => {
+        return res.sendStatus(404).send("Data not found.")
+    });
+
+}
+
 export default {
     signup,
-    signin
+    signin,
+    updateRow,
+    deleteRow
 }
