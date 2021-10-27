@@ -2,13 +2,9 @@ const index = async (req, res) => {
 	try {
 		const user_id = req.params.user_id;
 		const payload = await req.context.models.account_payment.findAll();
-		if (payload === null) {
-			return res.sendStatus(404);
-		} else {
-			return res.status(200).send(payload);
-		}
+		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -24,7 +20,7 @@ const create = async (req, res) => {
 		});
 		return res.status(200).send(payload);
 	} catch (error) {
-		return res.status(422);
+		return res.status(422).send(error.errors);
 	}
 };
 
@@ -32,13 +28,17 @@ const show = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const payload = await req.context.models.account_payment.findByPk(id);
-		return res.status(200).send(payload);
+		if (payload === null) {
+			res.sendStatus(404);
+		} else {
+			res.status(200).send(payload);
+		}
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
-const update = async (req, res, next) => {
+const update = async (req, res) => {
 	try {
 		const { id, user_id } = req.params;
 		const { acc_pin_number, acc_saldo, acc_total_point } = req.body;
@@ -55,10 +55,9 @@ const update = async (req, res, next) => {
 				},
 			}
 		);
-		next();
-		// return res.send(payload);
+		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(422).send(error);
 	}
 };
 
@@ -70,9 +69,9 @@ const destroy = async (req, res) => {
 				acc_number: id,
 			},
 		});
-		return res.sendStatus(200);
+		return res.status(200).send(`Delete ${payload} rows`);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(400).send(error);
 	}
 };
 

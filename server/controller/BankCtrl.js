@@ -1,13 +1,9 @@
 const index = async (req, res) => {
 	try {
 		const payload = await req.context.models.bank.findAll();
-		if (!payload.length) {
-			return res.sendStatus(404);
-		} else {
-			return res.status(200).send(payload);
-		}
+		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -15,9 +11,13 @@ const show = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const payload = await req.context.models.bank.findByPk(id);
-		return res.status(200).send(payload);
+		if (payload === null) {
+			return res.sendStatus(404);
+		} else {
+			return res.status(200).send(payload);
+		}
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -30,7 +30,7 @@ const create = async (req, res) => {
 		});
 		return res.status(200).send(payload);
 	} catch (error) {
-		return res.status(422).send('Already exists');
+		return res.status(422).send(error.errors);
 	}
 };
 
@@ -50,13 +50,9 @@ const update = async (req, res) => {
 				},
 			}
 		);
-		if (payload[0] === 0) {
-			return res.sendStatus(404);
-		} else {
-			return res.status(200).send(payload);
-		}
+		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(422).send(error);
 	}
 };
 
@@ -68,9 +64,9 @@ const destroy = async (req, res) => {
 				bank_id: id,
 			},
 		});
-		return res.sendStatus(200);
+		return res.status(200).send(`Delete ${payload} rows`);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(400).send(error);
 	}
 };
 

@@ -10,7 +10,6 @@ import middleware from './helpers/middleware';
 // for access models to db
 import models, { sequelize } from './model/indexModel';
 import routes from './routes/IndexRoute';
-import e from 'express';
 
 // declare port
 const port = process.env.PORT || 3000;

@@ -1,9 +1,9 @@
 const index = async (req, res) => {
 	try {
 		const payload = await req.context.models.payment_transaction.findAll();
-		res.status(200).send(payload);
+		return res.status(200).send(payload);
 	} catch (error) {
-		res.sendStatus(400);
+		return res.status(422).send(error);
 	}
 };
 
@@ -42,9 +42,9 @@ const create = async (req, res) => {
 			payt_promo_point: payt_promo_point,
 			payt_acc_number: acc_number,
 		});
-		res.status(200).send(payload);
+		return res.status(200).send(payload);
 	} catch (error) {
-		res.send(error);
+		return res.status(422).send(error.errors);
 	}
 };
 
@@ -60,7 +60,7 @@ const show = async (req, res) => {
 			res.status(200).send(payload);
 		}
 	} catch (error) {
-		res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -98,9 +98,9 @@ const update = async (req, res) => {
 				},
 			}
 		);
-		res.status(200).send(payload);
+		return res.status(200).send(payload);
 	} catch (error) {
-		res.sendStatus(422);
+		return res.status(422).send(error);
 	}
 };
 
@@ -112,9 +112,9 @@ const destroy = async (req, res) => {
 				payt_id: id,
 			},
 		});
-		res.status(200).send(payload);
+		return res.status(200).send(`Delete ${payload} rows`);
 	} catch (error) {
-		res.sendStatus(422);
+		return res.status(400).send(error);
 	}
 };
 

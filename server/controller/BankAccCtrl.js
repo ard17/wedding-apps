@@ -3,7 +3,7 @@ const index = async (req, res) => {
 		const payload = await req.context.models.bank_account.findAll();
 		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -17,7 +17,7 @@ const show = async (req, res) => {
 			return res.status(200).send(payload);
 		}
 	} catch (error) {
-		return res.sendStatus(404);
+		return res.status(400).send(error);
 	}
 };
 
@@ -51,7 +51,7 @@ const create = async (req, res) => {
 	}
 };
 
-const update = async (req, res, next) => {
+const update = async (req, res) => {
 	try {
 		const { id, user_id } = req.params;
 		const {
@@ -83,14 +83,9 @@ const update = async (req, res, next) => {
 				},
 			}
 		);
-		// next()
-		if (payload[0] === 0) {
-			return res.sendStatus(404);
-		} else {
-			return res.status(200).send(payload);
-		}
+		return res.status(200).send(payload);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(422).send(error);
 	}
 };
 
@@ -102,9 +97,9 @@ const destroy = async (req, res) => {
 				baac_acc_bank: id,
 			},
 		});
-		return res.sendStatus(200);
+		return res.status(200).send(`Delete ${payload} rows`);
 	} catch (error) {
-		return res.sendStatus(422);
+		return res.status(400).send(error);
 	}
 };
 
