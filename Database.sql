@@ -84,7 +84,7 @@ CREATE SEQUENCE order_name_seq
   START 1;
 
 create or replace function order_name () returns VARCHAR as $$  
-SELECT 'ORD'||extract(year from now())||''||extract(month from now())||''||extract(day from now())||LPAD('',4,'0')||nextval('order_name_seq');
+SELECT CONCAT('ORD',to_char(now(),'YYYYMMDD'),'#',lpad(''||nextval('order_name_seq'),3,'0'));
 $$ language sql;
 
 CREATE TABLE orders(
@@ -128,7 +128,7 @@ CREATE SEQUENCE acc_number_seq
   START 1;
 
 create or replace function acc_number () returns VARCHAR as $$  
-SELECT 'ACP-ID'||'-'||LPAD('',4,'0')||nextval('acc_number_seq');
+SELECT CONCAT('ACP-ID-',lpad(''||nextval('acc_number_seq'),4,'0'));
 $$ language sql;
 
 CREATE TABLE account_payment(
@@ -142,7 +142,7 @@ CREATE TABLE account_payment(
 );
 
 CREATE TABLE bank(
-	bank_id SERIAL,
+	bank_id VARCHAR(3) UNIQUE,
 	bank_name VARCHAR(25) UNIQUE,
 	CONSTRAINT bank_id_pk PRIMARY KEY(bank_id)
 );
@@ -156,7 +156,7 @@ CREATE TABLE bank_account(
 	baac_end_date DATE,
 	baac_type VARCHAR(20) NOT NULL,
 	baac_user_id INTEGER,
-	baac_bank_id INTEGER,
+	baac_bank_id VARCHAR(3),
 	CONSTRAINT baac_user_id_fk FOREIGN KEY (baac_user_id) REFERENCES users (user_id),
 	CONSTRAINT baac_bank_id_fk FOREIGN KEY (baac_bank_id) REFERENCES bank (bank_id),
 	CONSTRAINT baac_acc_bank_pk PRIMARY KEY(baac_acc_bank)
@@ -169,8 +169,7 @@ CREATE SEQUENCE payt_trx_number_seq
   START 1;
   
 create or replace function payt_trx_number () returns VARCHAR as $$
-select 'P'||extract(year from now())||''||extract(month from now())||''||extract(day from now())
-||'#'||LPAD('',4,'0')||nextval('payt_trx_number_seq');
+select CONCAT('P',to_char(now(),'YYYYMMDD'),'#',lpad(''||nextval('payt_trx_number_seq'),5,'0'));
 $$ language sql;
 
 CREATE TABLE payment_transaction(

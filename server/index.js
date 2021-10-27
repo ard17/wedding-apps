@@ -36,6 +36,10 @@ app.use(async (req, res, next) => {
 // 	res.send('Hello');
 // });
 
+app.use(process.env.URL_API + '/bank', routes.BankRoute);
+app.use(process.env.URL_API + '/bank_account', routes.BankAccRoute);
+app.use(process.env.URL_API + '/account_payment', routes.AccPaytRoute);
+app.use(process.env.URL_API + '/payment_transaction', routes.PaytTransRoute);
 app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
 app.use(process.env.URL_API + '/order', routes.OrdersRoute);
 app.use(process.env.URL_API + '/weddreserve', routes.WeddReserveRoute);
@@ -45,12 +49,19 @@ app.use(process.env.URL_API + '/weddreslines', routes.WeddResLinesRoute);
 
 
 
+//call routes
+app.use(process.env.URL_API + '/weddingcategory', routes.WeddingCategoryRoute);
+app.use(process.env.URL_API + '/address', routes.AddressRoute);
+app.use(process.env.URL_API + '/weddingvendor', routes.WeddingVendorRoute);
+app.use(process.env.URL_API + '/weddinggallery', routes.WeddingGalleryRoute);
+app.use(process.env.URL_API + '/users', routes.UserRoute);
+
 // use middleware to handle error from others modules
 app.use(middleware.handleError);
 app.use(middleware.notFound);
 
 const dropDatabaseSync = false;
-
+  //njn
 sequelize.sync({ force: dropDatabaseSync }).then(async () => {
 	if (dropDatabaseSync) {
 		console.log('Database do not drop');

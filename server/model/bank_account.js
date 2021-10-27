@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     baac_bank_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(3),
       allowNull: true,
       references: {
         model: 'bank',
