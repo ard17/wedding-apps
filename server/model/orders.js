@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('orders', {
     order_name: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(20),
       allowNull: false,
       defaultValue: Sequelize.Sequelize.fn('order_name'),
       primaryKey: true

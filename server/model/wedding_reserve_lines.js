@@ -54,6 +54,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'orders',
         key: 'order_name'
       }
+    },
+    writ_were_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'wedding_reserve',
+        key: 'were_id'
+      }
     }
   }, {
     sequelize,

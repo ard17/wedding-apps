@@ -41,6 +41,13 @@ app.use(process.env.URL_API + '/bank_account', routes.BankAccRoute);
 app.use(process.env.URL_API + '/account_payment', routes.AccPaytRoute);
 app.use(process.env.URL_API + '/payment_transaction', routes.PaytTransRoute);
 app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
+app.use(process.env.URL_API + '/order', routes.OrdersRoute);
+app.use(process.env.URL_API + '/weddreserve', routes.WeddReserveRoute);
+app.use(process.env.URL_API + '/weddpackage', routes.WeddPackageRoute);
+app.use(process.env.URL_API + '/weddreslines', routes.WeddResLinesRoute);
+
+
+
 
 //call routes
 app.use(process.env.URL_API + '/weddingcategory', routes.WeddingCategoryRoute);
