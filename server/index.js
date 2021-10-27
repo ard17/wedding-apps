@@ -36,6 +36,10 @@ app.use(async (req, res, next) => {
 // 	res.send('Hello');
 // });
 
+app.use(process.env.URL_API + '/bank', routes.BankRoute);
+app.use(process.env.URL_API + '/bank_account', routes.BankAccRoute);
+app.use(process.env.URL_API + '/account_payment', routes.AccPaytRoute);
+app.use(process.env.URL_API + '/payment_transaction', routes.PaytTransRoute);
 app.use(process.env.URL_API + '/payment', routes.PaymentRoute);
 
 //call routes

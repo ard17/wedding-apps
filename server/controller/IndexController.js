@@ -4,6 +4,10 @@ import WeddingCategoryCtrl from './WeddingCategoryCtrl';
 import AddressCtrl from './AddressCtrl';
 import WeddingVendorCtrl from './WeddingVendorCtrl';
 import WeddingGalleryCtrl from './WeddingGalleryCtrl';
+import BankCtrl from './BankCtrl';
+import BankAccCtrl from './BankAccCtrl';
+import AccPaytCtrl from './AccPaytCtrl';
+import PaytTransCtrl from './PaytTransCtrl';
 
 export default {
 	PaymentCtrl,
@@ -11,5 +15,9 @@ export default {
 	WeddingCategoryCtrl,
 	AddressCtrl,
 	WeddingVendorCtrl,
-	WeddingGalleryCtrl
+	WeddingGalleryCtrl,
+  BankCtrl,
+	BankAccCtrl,
+	AccPaytCtrl,
+	PaytTransCtrl,
 };
