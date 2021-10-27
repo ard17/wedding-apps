@@ -17,30 +17,46 @@ const createWeddReserve = async (req, res) => {
 
 
 const updateWeddReserve = async (req, res) => {
-    const result = await req.context.models.wedding_reserve.update(
-        {
-            were_created: Date.now(),
-            were_status: req.body.were_status,
-            were_user_id: req.body.were_user_id
-        },
-        {
-            returning: true,
-            where: { were_id: req.params.id }
-        }
-    );
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_reserve.update(
+            {
+                were_created: Date.now(),
+                were_status: req.body.were_status,
+                were_user_id: req.body.were_user_id
+            },
+            {
+                returning: true,
+                where: { were_id: req.params.id }
+            }
+        );
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
 const findAllWeddReserve = async (req, res) => {
-    const result = await req.context.models.wedding_reserve.findAll();
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_reserve.findAll();
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
-const findWeddReserveById = async(req,res)=>{
-    const result = await req.context.models.wedding_reserve.findByPk(
-        req.params.id
-    );
-    return res.send(result);
+const findWeddReserveById = async (req, res) => {
+    try {
+        const result = await req.context.models.wedding_reserve.findByPk(
+            req.params.id
+        );
+        if (result === null) {
+            return res.sendStatus(404);
+        } else {
+            return res.send(result);
+        }
+    } catch (error) {
+        return res.send(error);
+    }
 }
 
 const deleteWeddReserve = async (req, res) => {

@@ -49,37 +49,53 @@ const updateWeddResLines = async (req, res) => {
 
     const writ_subtotal = req.body.writ_qty * req.body.writ_price
 
-    const result = await req.context.models.wedding_reserve_lines.update(
-        {
-            writ_start_date: writ_start_date,
-            writ_end_date: writ_end_date,
-            writ_total_day: writ_total_day,
-            writ_qty: req.body.writ_qty,
-            writ_price: req.body.writ_price,
-            writ_subtotal: writ_subtotal,
-            writ_weve_id: req.body.writ_weve_id,
-            writ_wepa_id: req.body.writ_wepa_id,
-            writ_order_name: req.body.writ_order_name,
-            writ_were_id: req.body.writ_were_id
-        },
-        {
-            returning: true,
-            where: { writ_id: req.params.id }
-        }
-    );
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_reserve_lines.update(
+            {
+                writ_start_date: writ_start_date,
+                writ_end_date: writ_end_date,
+                writ_total_day: writ_total_day,
+                writ_qty: req.body.writ_qty,
+                writ_price: req.body.writ_price,
+                writ_subtotal: writ_subtotal,
+                writ_weve_id: req.body.writ_weve_id,
+                writ_wepa_id: req.body.writ_wepa_id,
+                writ_order_name: req.body.writ_order_name,
+                writ_were_id: req.body.writ_were_id
+            },
+            {
+                returning: true,
+                where: { writ_id: req.params.id }
+            }
+        );
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
 const findAllWeddResLines = async (req, res) => {
-    const result = await req.context.models.wedding_reserve_lines.findAll();
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_reserve_lines.findAll();
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
 const findWeddResLinesById = async (req, res) => {
+    try{
     const result = await req.context.models.wedding_reserve_lines.findByPk(
         req.params.id
     );
-    return res.send(result);
+    if (result === null) {
+        return res.sendStatus(404);
+    } else {
+        return res.send(result);
+    }
+    }catch(error){
+        return res.send(error);
+    }
 }
 
 const deleteWeddResLines = async (req, res) => {

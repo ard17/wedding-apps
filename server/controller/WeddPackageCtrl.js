@@ -22,32 +22,48 @@ const createWeddPackage = async (req, res) => {
 
 
 const updateWeddPackage = async (req, res) => {
-    const result = await req.context.models.wedding_package.update(
-        {
-            wepa_name: req.body.wepa_name,
-            wepa_price: req.body.wepa_price,
-            wepa_capacity: req.body.wepa_capacity,
-            wepa_type: req.body.wepa_type,
-            wepa_weve_id: req.body.wepa_weve_id
-        },
-        {
-            returning: true,
-            where: { wepa_id: req.params.id }
-        }
-    );
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_package.update(
+            {
+                wepa_name: req.body.wepa_name,
+                wepa_price: req.body.wepa_price,
+                wepa_capacity: req.body.wepa_capacity,
+                wepa_type: req.body.wepa_type,
+                wepa_weve_id: req.body.wepa_weve_id
+            },
+            {
+                returning: true,
+                where: { wepa_id: req.params.id }
+            }
+        );
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
 const findAllWeddPackage = async (req, res) => {
-    const result = await req.context.models.wedding_package.findAll();
-    return res.send(result);
+    try {
+        const result = await req.context.models.wedding_package.findAll();
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
-const findWeddPackageById = async(req,res)=>{
-    const result = await req.context.models.wedding_package.findByPk(
-        req.params.id
-    );
-    return res.send(result);
+const findWeddPackageById = async (req, res) => {
+    try {
+        const result = await req.context.models.wedding_package.findByPk(
+            req.params.id
+        );
+        if (result === null) {
+            return res.sendStatus(404);
+        } else {
+            return res.send(result);
+        }
+    } catch (error) {
+        return res.send(error);
+    }
 }
 
 const deleteWeddPackage = async (req, res) => {

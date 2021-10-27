@@ -25,43 +25,59 @@ const createOrders = async (req, res) => {
         });
         return res.send(result);
     } catch (error) {
-        res.send(error)
+        return res.send(error)
     }
 };
 
 
 
 const updateOrder = async (req, res) => {
-    const result = await req.context.models.orders.update(
-        {
-            order_subtotal: req.body.order_subtotal,
-            order_tax: req.body.order_tax,
-            order_discount: req.body.order_discount,
-            order_promo: req.body.order_promo,
-            order_total_price: req.body.order_total_price,
-            order_status: req.body.order_status,
-            order_payment_type: req.body.order_payment_type,
-            order_payment_trx: req.body.order_payment_trx,
-            order_user_id: req.body.order_user_id
-        },
-        {
-            returning: true,
-            where: { order_name: req.params.id }
-        }
-    );
-    return res.send(result);
+    try {
+        const result = await req.context.models.orders.update(
+            {
+                order_subtotal: req.body.order_subtotal,
+                order_tax: req.body.order_tax,
+                order_discount: req.body.order_discount,
+                order_promo: req.body.order_promo,
+                order_total_price: req.body.order_total_price,
+                order_status: req.body.order_status,
+                order_payment_type: req.body.order_payment_type,
+                order_payment_trx: req.body.order_payment_trx,
+                order_user_id: req.body.order_user_id
+            },
+            {
+                returning: true,
+                where: { order_name: req.params.id }
+            }
+        );
+        return res.send(result);
+    } catch (error) {
+        return res.send(error)
+    }
 };
 
 const findAllOrders = async (req, res) => {
-    const result = await req.context.models.orders.findAll();
-    return res.send(result);
+    try {
+        const result = await req.context.models.orders.findAll();
+        return res.send(result);
+    } catch (error) {
+        return res.send(error);
+    }
 };
 
-const findOrderByOrderName = async(req,res)=>{
-    const result = await req.context.models.orders.findByPk(
-        req.params.id
-    );
-    return res.send(result);
+const findOrderByOrderName = async (req, res) => {
+    try {
+        const result = await req.context.models.orders.findByPk(
+            req.params.id
+        );
+        if (result === null) {
+            return res.sendStatus(404);
+        } else {
+            return res.send(result);
+        }
+    } catch (error) {
+        return res.send(error);
+    }
 }
 
 const deleteOrder = async (req, res) => {
