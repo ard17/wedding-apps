@@ -31,6 +31,18 @@ CREATE TABLE wedding_gallery(
 	CONSTRAINT wega_weve_id_fk FOREIGN KEY (wega_weve_id) REFERENCES wedding_vendor(weve_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+--tabel wedding reviews
+CREATE TABLE wedding_reviews(
+	wore_id SERIAL,
+	wore_comments VARCHAR(255),
+	wore_rating INTEGER,
+	wore_user_id INTEGER,
+	wore_weve_id INTEGER,
+	CONSTRAINT wore_id_pk PRIMARY KEY (wore_id),
+	CONSTRAINT wore_user_id_fk FOREIGN KEY (wore_user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT wore_weve_id_fk FOREIGN KEY (wore_weve_id) REFERENCES wedding_vendor(weve_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 --tabel users
 CREATE TABLE users(
 	user_id SERIAL,

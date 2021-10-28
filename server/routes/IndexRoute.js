@@ -12,6 +12,7 @@ import WeddingCategoryRoute from './WeddingCategoryRoute';
 import AddressRoute from './AddressRoute';
 import WeddingVendorRoute from './WeddingVendorRoute';
 import WeddingGalleryRoute from './WeddingGalleryRoute';
+import WeddingReviewsRoute from './WeddingReviewsRoute';
 
 export default {
 	BankRoute,
@@ -24,8 +25,9 @@ export default {
 	AddressRoute,
 	WeddingVendorRoute,
 	WeddingGalleryRoute,
-  OrdersRoute,
+	OrdersRoute,
 	WeddReserveRoute,
 	WeddPackageRoute,
-	WeddResLinesRoute
+	WeddResLinesRoute,
+	WeddingReviewsRoute,
 };
