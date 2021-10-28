@@ -46,10 +46,8 @@ app.use(process.env.URL_API + '/weddreserve', routes.WeddReserveRoute);
 app.use(process.env.URL_API + '/weddpackage', routes.WeddPackageRoute);
 app.use(process.env.URL_API + '/weddreslines', routes.WeddResLinesRoute);
 
-
-
-
 //call routes
+app.use(process.env.URL_API + '/weddingreviews', routes.WeddingReviewsRoute);
 app.use(process.env.URL_API + '/weddingcategory', routes.WeddingCategoryRoute);
 app.use(process.env.URL_API + '/address', routes.AddressRoute);
 app.use(process.env.URL_API + '/weddingvendor', routes.WeddingVendorRoute);
@@ -61,7 +59,7 @@ app.use(middleware.handleError);
 app.use(middleware.notFound);
 
 const dropDatabaseSync = false;
-  //njn
+//njn
 sequelize.sync({ force: dropDatabaseSync }).then(async () => {
 	if (dropDatabaseSync) {
 		console.log('Database do not drop');

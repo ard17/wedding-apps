@@ -1,6 +1,6 @@
 const index = async (req, res) => {
 	try {
-		const payload = await req.context.models.bank.findAll();
+		const payload = await req.context.models.wedding_reviews.findAll();
 		return res.status(200).send(payload);
 	} catch (error) {
 		return res.status(400).send(error);
@@ -10,7 +10,7 @@ const index = async (req, res) => {
 const show = async (req, res) => {
 	try {
 		const id = req.params.id;
-		const payload = await req.context.models.bank.findByPk(id);
+		const payload = await req.context.models.wedding_reviews.findByPk(id);
 		if (payload === null) {
 			return res.sendStatus(404);
 		} else {
@@ -23,10 +23,13 @@ const show = async (req, res) => {
 
 const create = async (req, res) => {
 	try {
-		const { bank_id, bank_name } = req.body;
-		const payload = await req.context.models.bank.create({
-			bank_id: bank_id,
-			bank_name: bank_name,
+		const { wore_comments, wore_rating, wore_user_id, wore_weve_id } =
+			req.body;
+		const payload = await req.context.models.wedding_reviews.create({
+			wore_comments: wore_comments,
+			wore_rating: wore_rating,
+			wore_user_id: wore_user_id,
+			wore_weve_id: wore_weve_id,
 		});
 		return res.status(200).send(payload);
 	} catch (error) {
@@ -37,16 +40,19 @@ const create = async (req, res) => {
 const update = async (req, res) => {
 	try {
 		const id = req.params.id;
-		const { bank_id, bank_name } = req.body;
-		const payload = await req.context.models.bank.update(
+		const { wore_comments, wore_rating, wore_user_id, wore_weve_id } =
+			req.body;
+		const payload = await req.context.models.wedding_reviews.update(
 			{
-				bank_id: bank_id,
-				bank_name: bank_name,
+				wore_comments: wore_comments,
+				wore_rating: wore_rating,
+				wore_user_id: wore_user_id,
+				wore_weve_id: wore_weve_id,
 			},
 			{
 				returning: true,
 				where: {
-					bank_id: id,
+					wore_id: id,
 				},
 			}
 		);
@@ -59,9 +65,9 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
 	try {
 		const id = req.params.id;
-		const payload = await req.context.models.bank.destroy({
+		const payload = await req.context.models.wedding_reviews.destroy({
 			where: {
-				bank_id: id,
+				wore_id: id,
 			},
 		});
 		return res.status(200).send(`Delete ${payload} rows`);

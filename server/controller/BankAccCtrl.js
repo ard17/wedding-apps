@@ -47,7 +47,7 @@ const create = async (req, res) => {
 		});
 		return res.status(200).send(payload);
 	} catch (error) {
-		return res.status(422).send(error.errors);
+		return res.status(422).send(error);
 	}
 };
 

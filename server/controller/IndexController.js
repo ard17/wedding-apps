@@ -3,6 +3,7 @@ import WeddingCategoryCtrl from './WeddingCategoryCtrl';
 import AddressCtrl from './AddressCtrl';
 import WeddingVendorCtrl from './WeddingVendorCtrl';
 import WeddingGalleryCtrl from './WeddingGalleryCtrl';
+import WeddingReviewsCtrl from './WeddingReviewsCtrl';
 import OrdersCtrl from './OrdersCtrl';
 import WedReserveCtrl from './WedReserveCtrl';
 import WeddPackageCtrl from './WeddPackageCtrl';
@@ -18,7 +19,8 @@ export default {
 	AddressCtrl,
 	WeddingVendorCtrl,
 	WeddingGalleryCtrl,
-  OrdersCtrl,
+	WeddingReviewsCtrl,
+	OrdersCtrl,
 	WedReserveCtrl,
 	WeddPackageCtrl,
 	WedResLinesCtrl,
