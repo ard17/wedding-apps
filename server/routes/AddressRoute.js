@@ -4,9 +4,9 @@ import authJWT from '../helpers/authJWT';
 
 const router = Router();
 
-router.get('/', authJWT.ensureAdmin, IndexController.AddressCtrl.findAllRows);
+router.get('/', IndexController.AddressCtrl.findAllRows);
 
-router.get('/:id', authJWT.ensureUser, IndexController.AddressCtrl.findRowById);
+router.get('/:id', IndexController.AddressCtrl.findRowById);
 router.get(
 	'/:userid',
 	authJWT.ensureUser,
@@ -14,14 +14,10 @@ router.get(
 );
 
 // method post
-router.post('/', authJWT.ensureUser, IndexController.AddressCtrl.createRow);
+router.post('/', IndexController.AddressCtrl.createRow);
 // put
-router.put('/:id', authJWT.ensureUser, IndexController.AddressCtrl.updateRow);
+router.put('/:id', IndexController.AddressCtrl.updateRow);
 // delete
-router.delete(
-	'/:id',
-	authJWT.ensureUser,
-	IndexController.AddressCtrl.deleteRow
-);
+router.delete('/:id', IndexController.AddressCtrl.deleteRow);
 
 export default router;

@@ -5,9 +5,9 @@ import authJWT from '../helpers/authJWT';
 const router = Router();
 
 router.get('/', IndexController.BankCtrl.index);
-router.post('/', authJWT.ensureAdmin, IndexController.BankCtrl.create);
+router.post('/', IndexController.BankCtrl.create);
 router.get('/:id', IndexController.BankCtrl.show);
-router.put('/:id', authJWT.ensureAdmin, IndexController.BankCtrl.update);
-router.delete('/:id', authJWT.ensureAdmin, IndexController.BankCtrl.destroy);
+router.put('/:id', IndexController.BankCtrl.update);
+router.delete('/:id', IndexController.BankCtrl.destroy);
 
 export default router;

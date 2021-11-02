@@ -11,22 +11,10 @@ router.get('/', IndexController.WeddingVendorCtrl.findAllRows);
 router.get('/:id', IndexController.WeddingVendorCtrl.findRowById);
 
 // method post
-router.post(
-	'/',
-	authJWT.ensureVendor,
-	IndexController.WeddingVendorCtrl.createRow
-);
+router.post('/', IndexController.WeddingVendorCtrl.createRow);
 // put
-router.put(
-	'/:id',
-	authJWT.ensureVendor,
-	IndexController.WeddingVendorCtrl.updateRow
-);
+router.put('/:id', IndexController.WeddingVendorCtrl.updateRow);
 // delete
-router.delete(
-	'/:id',
-	authJWT.ensureVendor,
-	IndexController.WeddingVendorCtrl.deleteRow
-);
+router.delete('/:id', IndexController.WeddingVendorCtrl.deleteRow);
 
 export default router;
