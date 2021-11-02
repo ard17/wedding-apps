@@ -13,7 +13,6 @@ router.get('/:wegaId', IndexController.WeddingGalleryCtrl.findRowById);
 
 router.post(
 	'/multipart',
-	authJWT.ensureVendor,
 	IndexController.WeddingGalleryCtrl.uploadWeddingGallery,
 	IndexController.WeddingGalleryCtrl.createWeddingGallery,
 	IndexController.WeddingGalleryCtrl.findRowById
@@ -21,10 +20,6 @@ router.post(
 
 //router.put("/:id", IndexController.WeddingGalleryCtrl.updateWeddingGallery);
 
-router.delete(
-	'/:id',
-	authJWT.ensureVendor,
-	IndexController.WeddingGalleryCtrl.deleteRow
-);
+router.delete('/:id', IndexController.WeddingGalleryCtrl.deleteRow);
 
 export default router;
